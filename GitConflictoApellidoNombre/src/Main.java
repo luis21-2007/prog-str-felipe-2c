@@ -13,7 +13,7 @@ public class Main {
 
     public static double pedirDouble(Scanner scanner, String mensaje) {
         System.out.print(mensaje);
-        System.out.println("hola");
+        System.out.println("hola yova te veo");
         return scanner.nextDouble();
 
     }
