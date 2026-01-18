@@ -54,8 +54,8 @@ public class Main {
 
 
     /** * Metodo para calcular el imc de una persona *
-     * @param > peso - nos ayuda para calcular el imc *
-     * @param > estatura - este parametro nos ayuda en la estatura *
+     * @param peso>  - nos ayuda para calcular el imc *
+     * @param estatura> estatura - este parametro nos ayuda en la estatura *
      * */
     public static void calcularIMC(double peso, double estatura) {
         double imc = peso / (estatura * estatura);
