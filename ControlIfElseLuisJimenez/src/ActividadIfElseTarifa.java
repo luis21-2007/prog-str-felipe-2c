@@ -33,11 +33,11 @@ public class ActividadIfElseTarifa {
 
                 System.out.println("Tu tarifa es de 90 ");
                 tarifa=90;
-                System.out.println("Esta es tu edad: "+edad+" \n Si eres estudiante ?" + estudiante +"\n Esta es tu tarifa "+ tarifa);
+                System.out.println("Esta es tu edad: "+edad+" \n Si eres estudiante " +"\n Esta es tu tarifa "+ tarifa);
             } else {
                 System.out.println("Tu tarifa es de 120");
                 tarifa=120;
-                System.out.println("Esta es tu edad: "+edad+"\n No eres estudiante ?" + estudiante +"\n Esta es tu tarifa "+ tarifa);
+                System.out.println("Esta es tu edad: "+edad+"\n No eres estudiante " +"\n Esta es tu tarifa "+ tarifa);
             }
         }
 
