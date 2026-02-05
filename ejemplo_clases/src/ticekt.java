@@ -1,28 +1,22 @@
 public class ticekt {
-
     private final double DESCUENTO =0.10;
     private final double PRECIO = 10;
     public double subtotal;
     public double descuentoCalculado;
     public   double Total;
-
     public void process(int cantidad){
         calcularSubtotal(cantidad);
-        calculaDescuento(this.subtotal);
-        calcularTotal(this.Total);
+        calculaDescuento();
+        calcularTotal();
     }
-
     private void calcularSubtotal(int cantidad){
         this.subtotal= cantidad*PRECIO;
     }
-    private void calculaDescuento(double subtotal) {
-
+    private void calculaDescuento() {
         this.descuentoCalculado = this.subtotal*DESCUENTO;
     }
-
-    private void calcularTotal(double subtotal){
+    private void calcularTotal(){
         this.Total= this.subtotal - this.descuentoCalculado;
-
     }
     public void imprimirTicket(double cantidad){
     System.out.println("----Ticket----");
