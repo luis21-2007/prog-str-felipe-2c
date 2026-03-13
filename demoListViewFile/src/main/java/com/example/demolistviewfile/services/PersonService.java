@@ -32,8 +32,32 @@ public class PersonService {
         return result;
     }
 
-    public void addPerson(String name, String email, int edad) throws IOException {
-        repo.addNewLine(name+","+email+","+edad);
+    public void addPerson(String name, String email, String edadt) throws IOException {
+        validarPerson(name,email,edadt);
+        repo.addNewLine(name+","+email+","+edadt);
+    }
+    private void validarPerson(String name, String email, String edad) {
+        if (name == null || name.isBlank() || name.length() < 3) {
+            throw new IllegalArgumentException("El nombre no cumple con los estandares");
+        }
+
+        String em = (email == null) ? "" : email.trim();
+
+        if (em.isBlank() || !em.contains("@") || !em.contains(".")) {
+            throw new IllegalArgumentException("El correo es incorrecto");
+
+        }
+        try {
+
+            int edadnum = Integer.parseInt(edad);
+            if (edadnum < 18) {
+                throw new IllegalArgumentException("Solo se permiten mayores de edad");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("La edad debe ser numerica");
+        }
+
+
     }
 
 

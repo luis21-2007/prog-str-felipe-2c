@@ -46,24 +46,15 @@ public class AppController {
     public void onAddPerson() {
         try {
             String edadt = txtedad.getText();
-            int edad = Integer.parseInt(edadt);
             String name = txtNombre.getText();
             String email = txtEmail.getText();
-            service.addPerson(name, email, edad);
+            service.addPerson(name, email, edadt);
             lblMsg.setText("Usuario Creado correctamente");
             lblMsg.setStyle("-fx-text-fill: green");
             txtNombre.clear();
             txtEmail.clear();
             txtedad.clear();
             loadFromFile();
-            if (edad<0||edad>120){
-                lblMsge.setText("Error edad no validad");
-                lblMsg.setStyle("-fx-text-fill: red");
-            }else {
-                lblMsge.setText("Edad valida");
-                lblMsge.setStyle("-fx-text-fill: green");
-            }
-
         } catch (IOException e) {
             lblMsg.setText("Error de archivo" + e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
