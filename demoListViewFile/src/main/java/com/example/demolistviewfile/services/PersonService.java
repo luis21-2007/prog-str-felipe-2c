@@ -23,7 +23,7 @@ public class PersonService {
                     String name = parts[0];
                     String email = parts[1];
                     int edad = Integer.parseInt(parts[2].trim());
-                    result.add(name+" - "+ email+" - "+edad+" años");
+                    result.add(name+" - "+ email+" - "+edad);
                 } catch (NumberFormatException e) {
                     continue;
                 }
@@ -31,7 +31,31 @@ public class PersonService {
         }
         return result;
     }
+    public void updatePerson(int index, String name, String email, String age) throws IOException {
+       validarPerson(name,email,age);
+        List<String> listaOriginal = repo.readAllLines();
+        List<String> cleanLines =new ArrayList<>();
+        for (String line : listaOriginal){
+            if (line!=null && !line.isBlank()){
+                cleanLines.add(line);//esta linea esta buena , ya que no es null y tampoco esta blanco
 
+            }
+        }
+        cleanLines.set(index,name+","+email+","+age);
+        repo.saveFile(cleanLines);//sustitui la info de el archivo dejandolo actualizado
+    }
+    public void delete(int index) throws IOException {
+        //delete
+        List<String> listaOriginal = repo.readAllLines();
+        List<String> cleanLines = new ArrayList<>();
+        for (String line : listaOriginal) {
+            if (line != null && !line.isBlank()) {
+                cleanLines.add(line);
+            }
+        }
+        cleanLines.remove(index);
+        repo.saveFile(cleanLines);
+    }
     public void addPerson(String name, String email, String edadt) throws IOException {
         validarPerson(name,email,edadt);
         repo.addNewLine(name+","+email+","+edadt);

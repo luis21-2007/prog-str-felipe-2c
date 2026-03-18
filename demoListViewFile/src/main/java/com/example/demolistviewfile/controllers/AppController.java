@@ -34,6 +34,18 @@ public class AppController {
     @FXML
     public void initialize(){
         listView.setItems(data);
+        listView.getSelectionModel().selectedItemProperty().addListener(
+                (obs,oldValue,newValue) ->{
+                    if(newValue!=null){
+                        String[] parts= newValue.split(" - ");
+                        txtNombre.setText(parts[0]);
+                        txtEmail.setText(parts[1]);
+                        txtedad.setText(parts[2]);
+                    }
+
+
+                }
+        );
         loadFromFile();
     }
 
@@ -62,6 +74,48 @@ public class AppController {
             lblMsg.setText("Error de datos" + e.getMessage());
             lblMsg.setStyle("-fx-text-fill: red");
         }
+    }
+    @FXML
+    public void onUpdate(){
+        try {
+            int index = listView.getSelectionModel().getSelectedIndex();
+            String age = txtedad.getText();
+            String name = txtNombre.getText();
+            String email = txtEmail.getText();
+
+            service.updatePerson(index, name, email, age);
+            loadFromFile();
+            txtNombre.clear();
+            txtEmail.clear();
+            txtedad.clear();
+            lblMsg.setText("Se actualizo el registro correctame");
+            lblMsg.setStyle("-fx-text-fill: green");
+        } catch (IOException e) {
+            lblMsg.setText("Hubo un error con el archivo");
+            lblMsg.setStyle("-fx-text-fill: red");
+        } catch (IllegalArgumentException e) {
+            lblMsg.setText("Hubo un error con con los datos"+e.getMessage());
+            lblMsg.setStyle("-fx-text-fill: red");
+        }
+    }
+    @FXML
+    public void onDelete(){
+        try {
+        int index = listView.getSelectionModel().getSelectedIndex();
+        service.delete(index);
+        loadFromFile();
+        txtNombre.clear();
+        txtEmail.clear();
+        txtedad.clear();
+        lblMsg.setText("Se elimino  el registro correctame");
+        lblMsg.setStyle("-fx-text-fill: green");
+    } catch (IOException e) {
+        lblMsg.setText("Hubo un error con el archivo");
+        lblMsg.setStyle("-fx-text-fill: red");
+    } catch (IllegalArgumentException e) {
+        lblMsg.setText("Hubo un error con con los datos"+e.getMessage());
+        lblMsg.setStyle("-fx-text-fill: red");
+    }
     }
     private void loadFromFile(){
         try{
